@@ -1,0 +1,43 @@
+{
+  "name": "cdn-button",
+  "private": false,
+  "version": "1.0.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/cdn-button.cjs.js",
+  "module": "./dist/cdn-button.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/cdn-button.es.js",
+      "require": "./dist/cdn-button.cjs.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./style.css": "./dist/cdn-button.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "build:min": "npm run build && terser dist/cdn-button.cjs.js -o dist/cdn-button.cjs.min.js && terser dist/cdn-button.umd.js -o dist/cdn-button.umd.min.js",
+    "preview": "vite preview"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup-plugin-visualizer": "^5.9.2",
+    "terser": "^5.19.2",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vite-plugin-dts": "^3.5.2"
+  }
+}

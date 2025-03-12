@@ -1,0 +1,2 @@
+"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const o=require("react/jsx-runtime"),f=require("react"),j=({text:s="Button",color:c="#3498db",size:u="medium",showCounter:t=!1,className:r="",onClick:n,children:a,...i})=>{const[e,l]=f.useState(0),d=b=>{t&&l(m=>m+1),n&&n(b)};return o.jsxs("button",{className:`cdn-button cdn-button-${u} ${r}`,style:{backgroundColor:c},onClick:d,...i,children:[s||a,t&&e>0&&o.jsxs("span",{className:"cdn-button-counter",children:["(",e,")"]})]})};exports.Button=j;
+//# sourceMappingURL=cdn-button.cjs.js.map
