@@ -23,12 +23,12 @@
     "build:min": "npm run build && terser dist/cdn-button.cjs.js -o dist/cdn-button.cjs.min.js && terser dist/cdn-button.umd.js -o dist/cdn-button.umd.min.js",
     "preview": "vite preview"
   },
-  "dependencies": {},
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
+    "@types/node": "^22.13.10",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
