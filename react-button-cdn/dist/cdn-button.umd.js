@@ -18,7 +18,10 @@
     const targetElement = document.getElementById(targetId);
 
     if (!targetElement) {
-      console.error(`Target element with ID ${targetId} not found`);
+      console.log(
+        `Target element with ID ${targetId} not found yet. Will retry when available.`
+      );
+      watchForElement(targetId);
       return;
     }
 
@@ -41,18 +44,53 @@
     button.style.borderRadius = "4px";
     button.style.cursor = "pointer";
 
-    // Append the button to the target element
-    targetElement.appendChild(button);
+    // Only append if the element doesn't already have the button
+    if (!targetElement.querySelector(".cdn-custom-button")) {
+      // Append the button to the target element
+      targetElement.appendChild(button);
+    }
+  }
+
+  // Watch for element to appear in DOM using MutationObserver
+  function watchForElement(targetId) {
+    // Create an observer instance
+    const observer = new MutationObserver(function (mutations) {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        // We found the element, create the button
+        createButton(targetId);
+        // Stop observing
+        observer.disconnect();
+      }
+    });
+
+    // Start observing the document with the configured parameters
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    // Set a backup timeout to retry after 2 seconds in case the observer misses it
+    setTimeout(function () {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        createButton(targetId);
+        observer.disconnect();
+      }
+    }, 2000);
   }
 
   // Initialize when DOM is fully loaded
-  function init() {
-    createButton("cdn-button");
+  function init(customId) {
+    const targetId = customId || "cdn-button";
+    createButton(targetId);
   }
 
   // Run initialization
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", function () {
+      init();
+    });
   } else {
     init();
   }
